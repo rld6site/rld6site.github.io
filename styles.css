@@ -1,0 +1,138 @@
+/* TODO: Font. */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+:root {
+    --matched-blue: #6ba8ff;
+    --background: #000;
+    --foreground: #e8e8e8;
+    --light-foreground: #555;
+}
+
+::-webkit-scrollbar {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--light-foreground);
+}
+
+html {
+    background: var(--background);
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: "Roboto";
+    font-size: 18px;
+    padding: 20px 25px;
+}
+
+h1 {
+    font-size: 25px;
+    font-family: "Roboto Condensed";
+    font-weight: 300;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    padding-left: 0px;
+}
+
+li {
+    padding-bottom: 15px;
+}
+
+#top-bar {
+    display: flex;
+    align-items: center;
+    font-family: "Roboto Condensed";
+    justify-content: space-between;
+}
+
+#title {
+    text-decoration: none;
+    color: var(--foreground);
+    font-size: 25px;
+}
+
+nav {
+/*     Float right */
+    margin-left: auto;
+}
+
+nav .item {
+    text-decoration: none;
+    color: var(--foreground);
+    padding: 0px 15px;
+    border-right: 1px solid var(--light-foreground);
+}
+
+a, nav .item:hover, nav #selected, #title span {
+    color: var(--matched-blue);
+}
+
+nav img {
+    vertical-align: middle;
+    height: 20px;
+    filter: saturate(0.5);
+}
+
+nav img:hover {
+    filter: saturate(0.5) brightness(0.8);
+}
+
+/* TODO: iPad centering. */
+#content {
+    max-width: 800px;
+    align: center;
+    margin: auto;
+}
+
+#portfolio {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(3, auto);
+    grid-gap: 15px;
+    margin-top: 40px;
+}
+
+#portfolio img {
+    max-width: 100%;
+    height: auto;
+}
+
+#portfolio img:hover {
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    nav {
+        position: absolute;
+        margin-top: 70px;
+        font-size: 20px;
+    }
+
+    nav a[href="/"] {
+        padding-left: 0px;
+    }
+
+    #portfolio {
+        grid-template-columns: repeat(1, auto);
+        grid-template-rows: repeat(1, auto);
+        margin-top: 50px;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    #content {
+        margin-top: 50px;
+    }
+}

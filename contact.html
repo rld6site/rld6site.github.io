@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Richard Linden Design</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" href="assets/RL_circle.png">
+<script type="text/javascript">
+const key = [125, 109, 101, 95, 102, 110, 115, 110, 107, 122, 125, 105, 114, 110, 105, 95, 95, 109, 104, 99, 107];
+const addr = [15, 1, 12, 49, 2, 11, 29, 46, 9, 31, 17, 5, 1, 1, 28, 43, 55, 67, 6, 6, 31];
+
+let plain_bytes = new Uint8Array(addr.length);
+
+for (let i = 0; i < addr.length; i += 1) {
+    plain_bytes[i] = addr[i] ^ key[i];
+}
+
+const res_addr = new TextDecoder().decode(plain_bytes);
+
+window.onload = () => {
+    let mail_link = document.getElementById("contact-addr");
+    mail_link.setAttribute("href", "mailto:" + res_addr);
+    mail_link.innerHTML = res_addr;
+};
+</script>
+</head>
+<body>
+    <div id="top-bar">
+        <a href="/" id="title">Richard Linden <span>Portfolio</span></a>
+        <nav>
+            <a href="/" class="item">Home</a>
+            <a href="about" class="item">About</a>
+            <a href="contact" class="item" id="selected">Contact</a>
+            <a href="https://www.linkedin.com/in/richard-linden-93608a10"><img src="assets/linkedin.png"></a>
+        </nav>
+    </div>
+    <div id="content">
+        <h1>Contact</h1>
+        <noscript>
+            Please enable JavaScript to view e-mail or contact me via <a href="https://www.linkedin.com/in/richard-linden-93608a10">LinkedIn</a>.
+        </noscript>
+        <p>
+            e-mail: <a id="contact-addr" href=""></a><br><br>
+            cell: 770-378-1705
+        </p>
+        </p>
+    </div>
+</body>
+</html>

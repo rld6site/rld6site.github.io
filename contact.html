@@ -7,21 +7,33 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="icon" href="assets/RL_circle.png">
 <script type="text/javascript">
-const key = [125, 109, 101, 95, 102, 110, 115, 110, 107, 122, 125, 105, 114, 110, 105, 95, 95, 109, 104, 99, 107];
 const addr = [15, 1, 12, 49, 2, 11, 29, 46, 9, 31, 17, 5, 1, 1, 28, 43, 55, 67, 6, 6, 31];
+const addr_key = [125, 109, 101, 95, 102, 110, 115, 110, 107, 122, 125, 105, 114, 110, 105, 95, 95, 109, 104, 99, 107];
 
-let plain_bytes = new Uint8Array(addr.length);
+const cell = [69, 70, 91, 93, 80, 87, 84, 69, 71, 83, 94, 71];
+const cell_key = [114, 113, 107, 112, 99, 96, 108, 104, 118, 100, 110, 114];
 
-for (let i = 0; i < addr.length; i += 1) {
-    plain_bytes[i] = addr[i] ^ key[i];
+function otp_decode_bytes(data, key) {
+    console.assert(data.length === key.length);
+    let plain_bytes = new Uint8Array(data.length);
+
+    for (let i = 0; i < data.length; i += 1) {
+        plain_bytes[i] = data[i] ^ key[i];
+    }
+
+    return new TextDecoder().decode(plain_bytes);
 }
 
-const res_addr = new TextDecoder().decode(plain_bytes);
+const res_addr = otp_decode_bytes(addr, addr_key);
+const res_cell = otp_decode_bytes(cell, cell_key);
 
 window.onload = () => {
     let mail_link = document.getElementById("contact-addr");
     mail_link.setAttribute("href", "mailto:" + res_addr);
     mail_link.innerHTML = res_addr;
+
+    let cell_number = document.getElementById("cell-number");
+    cell_number.innerHTML = res_cell;
 };
 </script>
 </head>
@@ -38,11 +50,11 @@ window.onload = () => {
     <div id="content">
         <h1>Contact</h1>
         <noscript>
-            Please enable JavaScript to view e-mail or contact me via <a href="https://www.linkedin.com/in/richard-linden-93608a10">LinkedIn</a>.
+            Please enable JavaScript to view contact information or get in touch via <a href="https://www.linkedin.com/in/richard-linden-93608a10">LinkedIn</a>.
         </noscript>
         <p>
             e-mail: <a id="contact-addr" href=""></a><br><br>
-            cell: 770-378-1705
+            cell: <span id="cell-number"></span>
         </p>
         </p>
     </div>

@@ -141,4 +141,8 @@ nav img:hover {
     #content {
         margin-top: 70px;
     }
+
+    #title {
+        font-size: 29px;
+    }
 }
